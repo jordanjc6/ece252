@@ -34,7 +34,7 @@ int main(void)
     /* remove pointe p */
     p->data = NULL;
     p->size = 0;
-    free(p);
+    /*free(p);*/
 
     printf("q->x = %d, q->y =%d\n", ((struct point*)(q->data))->x, ((struct point *)(q->data))->y);
     
