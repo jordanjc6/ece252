@@ -17,19 +17,19 @@ int main(int argc, char *argv[])
     struct dirent *p_dirent;
     char str[64];
 
-    if (argc == 1) {
-        fprintf(stderr, "Usage: %s <directory name>\n", argv[0]);
-        exit(1);
+    if (argc == 1) { // no directory name specified
+        fprintf(stderr, "Usage: %s <directory name>\n", argv[0]); // print content in file
+        exit(1); // minor error
     }
 
-    if ((p_dir = opendir(argv[1])) == NULL) {
-        sprintf(str, "opendir(%s)", argv[1]);
+    if ((p_dir = opendir(argv[1])) == NULL) { // no such directory existing
+        sprintf(str, "opendir(%s)", argv[1]); // format string to be printed and store in str
         perror(str);
-        exit(2);
+        exit(2); // major error
     }
 
-    while ((p_dirent = readdir(p_dir)) != NULL) {
-        char *str_path = p_dirent->d_name;  /* relative path name! */
+    while ((p_dirent = readdir(p_dir)) != NULL) { // loop until there is no next directory entry
+        char *str_path = p_dirent->d_name;  /* relative path name! (d_name is file name) */ 
 
         if (str_path == NULL) {
             fprintf(stderr,"Null pointer found!"); 
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    if ( closedir(p_dir) != 0 ) {
+    if ( closedir(p_dir) != 0 ) { // if close fails
         perror("closedir");
         exit(3);
     }

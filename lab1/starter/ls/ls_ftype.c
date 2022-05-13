@@ -15,15 +15,16 @@ int main(int argc, char *argv[])
 {
     int i;
     char *ptr;
-    struct stat buf;
+    struct stat buf; // stat has fields to describe the file
 
     for (i = 1; i < argc; i++) {
         printf("%s: ", argv[i]);
-        if (lstat(argv[i], &buf) < 0) {
+        if (lstat(argv[i], &buf) < 0) { // lstat(x, y) stores file info of x into y
             perror("lstat error");
             continue;
         }   
 
+// set file type
         if      (S_ISREG(buf.st_mode))  ptr = "regular";
         else if (S_ISDIR(buf.st_mode))  ptr = "directory";
         else if (S_ISCHR(buf.st_mode))  ptr = "character special";
